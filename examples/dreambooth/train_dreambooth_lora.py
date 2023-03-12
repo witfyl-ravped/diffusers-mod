@@ -965,7 +965,8 @@ def main(args):
                 pipeline.set_progress_bar_config(disable=True)
 
                 # run inference
-                generator = torch.Generator(device=accelerator.device).manual_seed(args.seed)
+                # generator = torch.Generator(device=accelerator.device).manual_seed(args.seed)
+                generator = torch.Generator(device="cpu").manual_seed(args.seed)
                 images = [
                     pipeline(args.validation_prompt, num_inference_steps=25, generator=generator).images[0]
                     for _ in range(args.num_validation_images)
@@ -992,7 +993,8 @@ def main(args):
     accelerator.wait_for_everyone()
     if accelerator.is_main_process:
         unet = unet.to(torch.float32)
-        unet.save_attn_procs(args.output_dir)
+        # unet.save_attn_procs(args.output_dir)
+        unet.save_attn_procs(args.output_dir, weights_name="pytorch_lora_weights.bin")        
 
         # Final inference
         # Load previous pipeline
@@ -1003,11 +1005,13 @@ def main(args):
         pipeline = pipeline.to(accelerator.device)
 
         # load attention processors
-        pipeline.unet.load_attn_procs(args.output_dir)
+        # pipeline.unet.load_attn_procs(args.output_dir)
+        unet.load_attn_procs(args.output_dir, weight_name="pytorch_lora_weights.bin")
 
         # run inference
         if args.validation_prompt and args.num_validation_images > 0:
-            generator = torch.Generator(device=accelerator.device).manual_seed(args.seed) if args.seed else None
+            # generator = torch.Generator(device=accelerator.device).manual_seed(args.seed) if args.seed else None
+            generator = torch.Generator(device="cpu").manual_seed(args.seed) if args.seed else None
             images = [
                 pipeline(args.validation_prompt, num_inference_steps=25, generator=generator).images[0]
                 for _ in range(args.num_validation_images)

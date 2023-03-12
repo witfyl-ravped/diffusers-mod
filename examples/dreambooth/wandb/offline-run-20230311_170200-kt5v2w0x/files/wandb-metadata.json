@@ -1,0 +1,59 @@
+{
+    "os": "macOS-10.16-x86_64-i386-64bit",
+    "python": "3.10.9",
+    "heartbeatAt": "2023-03-11T23:02:00.608335",
+    "startedAt": "2023-03-11T23:02:00.522279",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--pretrained_model_name_or_path=runwayml/stable-diffusion-v1-5",
+        "--instance_data_dir=/Users/jon/StableDiffusion/lora/milora-src/",
+        "--output_dir=/Users/jon/StableDiffusion/lora/milora/model_output",
+        "--instance_prompt=milora",
+        "--resolution=512",
+        "--train_batch_size=1",
+        "--gradient_accumulation_steps=1",
+        "--checkpointing_steps=100",
+        "--learning_rate=1e-4",
+        "--report_to=wandb",
+        "--lr_scheduler=constant",
+        "--lr_warmup_steps=0",
+        "--max_train_steps=500",
+        "--validation_prompt=cyborg milora",
+        "--validation_epochs=50",
+        "--seed=0"
+    ],
+    "state": "running",
+    "program": "/Users/jon/StableDiffusion/lora/dreambooth/diffusers/examples/dreambooth/train_dreambooth_lora.py",
+    "codePath": "examples/dreambooth/train_dreambooth_lora.py",
+    "git": {
+        "remote": "https://github.com/huggingface/diffusers",
+        "commit": "bbab8553224d12f7fd58b0e65b0daf899769ef0b"
+    },
+    "email": "bahaithedip@gmail.com",
+    "root": "/Users/jon/StableDiffusion/lora/dreambooth/diffusers",
+    "host": "than.local",
+    "username": "jon",
+    "executable": "/Users/jon/opt/anaconda3/envs/db-diff/bin/python",
+    "cpu_count": 12,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2400,
+        "min": 2400,
+        "max": 2400
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2400,
+            "min": 2400,
+            "max": 2400
+        }
+    ],
+    "disk": {
+        "total": 3721.8717193603516,
+        "used": 11.072517395019531
+    },
+    "memory": {
+        "total": 64.0
+    }
+}
